@@ -8,9 +8,11 @@ const privateRoutes = require("./routes/private");
 const checkDataRoutes = require("./routes/checkData");
 const signUpRoutes = require("./routes/signUp");
 const loginRoutes = require("./routes/login")
+// const authMiddleware = require('./middlewares/authMiddleware')
 
 app.use(cors());
 app.use(express.json());
+// app.use(authMiddleware)
 
 app.use("/api/public", publicRoutes);
 app.use("/api/private", privateRoutes);

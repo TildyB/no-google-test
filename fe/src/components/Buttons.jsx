@@ -6,7 +6,11 @@ const Buttons = ({loggedinUser}) => {
     console.log(response.data);
   };
   const getPrivate = async() => {
-    const response = await axios.get("http://localhost:3000/api/private");
+    const response = await axios.get("http://localhost:3000/api/private", {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem('token')
+      }
+    });
     console.log(response.data);
   };
 

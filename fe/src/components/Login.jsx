@@ -24,6 +24,10 @@ const Login = () => {
       console.log(error);
     }
   }
+const handleLogout = () => {
+  localStorage.clear()
+  setLoggedinUser(false)
+}
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
@@ -37,6 +41,7 @@ const Login = () => {
         <input type="text" placeholder="username" onChange={(e)=> setUserName(e.target.value)}></input>
         <input type="password" placeholder="password" onChange={(e)=>setPassword(e.target.value)} />
         <button onClick={userLogin}>Login</button>
+        <button onClick={handleLogout}>Logout</button>
         <Buttons {...{loggedinUser}}></Buttons>
     </>
   )
