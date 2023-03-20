@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const Buttons = () => {
+const Buttons = ({loggedinUser}) => {
   const getPublic = async() => {
    const response = await axios.get("http://localhost:3000/api/public")
     console.log(response.data);
@@ -15,9 +15,11 @@ const Buttons = () => {
       <button className="btn btn-primary" onClick={getPublic}>
         Public
       </button>
+      {loggedinUser && 
       <button className="btn btn-secondary" onClick={getPrivate}>
         Private
       </button>
+      }
     </>
   );
 };

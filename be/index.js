@@ -7,6 +7,7 @@ const publicRoutes = require("./routes/public");
 const privateRoutes = require("./routes/private");
 const checkDataRoutes = require("./routes/checkData");
 const signUpRoutes = require("./routes/signUp");
+const loginRoutes = require("./routes/login")
 
 app.use(cors());
 app.use(express.json());
@@ -15,6 +16,7 @@ app.use("/api/public", publicRoutes);
 app.use("/api/private", privateRoutes);
 app.use ("/api/check", checkDataRoutes);
 app.use("/api/signUp", signUpRoutes);
+app.use("/api/login", loginRoutes)
 
 
 

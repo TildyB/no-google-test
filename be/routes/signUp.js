@@ -11,7 +11,6 @@ router.post("/", async (req, res) => {
 
     bcrypt.genSalt(saltRounds, function(err, salt) {
         bcrypt.hash(password, salt, function(err, hash) {
-            // Store hash in your password DB.
             const newUser = new User({
                 email,
                 password: hash,

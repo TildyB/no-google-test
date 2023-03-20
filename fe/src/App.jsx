@@ -1,13 +1,13 @@
 import React from 'react';
-import Login from "./components/Login";
-import Buttons from './components/Buttons';
+import Signup from "./components/Signup";
+import Login from './components/Login'
 
 
 const App = () => {
   return ( 
     <>
+    <Signup></Signup>
     <Login></Login>
-    <Buttons></Buttons>
     </>
    );
 }

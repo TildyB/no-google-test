@@ -1,39 +1,45 @@
-import { useEffect, useState } from "react";
+import { useState } from "react"
 import axios from "axios"
-
-import checkEmail from "../util/checkEmail";
-import checkUsername from "../util/checkUsername";
+import { useEffect } from "react"
+import Buttons from "./Buttons"
 
 const Login = () => {
-  const [userName, setUserName] = useState("");
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
-    const [isUserNameValid,setIsUserNameValid] = useState(false);
-    const [isEmailValid,setIsEmailValid] = useState(false);
+  
+  const [ userName, setUserName ] = useState("")
+  const [ password, setPassword ] = useState("")
+  const [ loggedinUser, setLoggedinUser ] = useState(false)
 
-
-    const userSignUp = async() => {
-      const response =   await axios.post("http://localhost:3000/api/signup", {
-            userName: userName,
-            password: password,
-            email: email
+  const userLogin = async () => {
+    try {
+      const response = await axios.post("http://localhost:3000/api/login", {
+            userName,
+            password
         })
+      console.log(response);
+      
+      localStorage.setItem('token', response.data)
+      setLoggedinUser(true)
+      
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    useEffect(() => {
-        checkUsername(userName,setIsUserNameValid);
-        checkEmail(email,setIsEmailValid);
-    }, [email,userName])
-
-        
-    
-    return ( <>
-        <h1>Login</h1>
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      setLoggedinUser(true)
+    }
+  }, [])
+  
+  return (
+    <>
+      <h1>Login</h1>
         <input type="text" placeholder="username" onChange={(e)=> setUserName(e.target.value)}></input>
         <input type="password" placeholder="password" onChange={(e)=>setPassword(e.target.value)} />
-        <input type="email" placeholder="email" onChange={(e)=> setEmail(e.target.value)} /> 
-        <button disabled={!isUserNameValid || !isEmailValid} onClick={userSignUp}>Login</button>
-    </> );
+        <button onClick={userLogin}>Login</button>
+        <Buttons {...{loggedinUser}}></Buttons>
+    </>
+  )
 }
- 
-export default Login;
+
+export default Login
